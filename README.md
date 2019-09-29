@@ -4,7 +4,6 @@ A Terraform module used to create Terraform Automation pipelines using AWS CodeP
 
 ## Usage example
 
-
 ```hcl
 module "example" {
   source = "git::https://github.com/relu/terraform-aws-codepipeline.git?ref=v1.0.0"
@@ -17,6 +16,13 @@ module "example" {
   }
 }
 ```
+
+Note that you will need to set the AWS region. If you're using GitHub as a
+source, you will need to create a [personal access
+token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line),
+provide `repo` and `admin:repo_hook` permissions. Use the token as an
+environment variable named `GITHUB_TOKEN` before applying the configuration
+through terraform.
 
 ## Doc generation
 
