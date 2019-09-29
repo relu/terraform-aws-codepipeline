@@ -84,7 +84,7 @@ resource "aws_codebuild_project" "pipeline_plan_stage_project" {
     }
 
     dynamic "environment_variable" {
-      for_each = var.codebuild_environment_variables
+      for_each = local.codebuild_environment_variables
       iterator = env
 
       content {
@@ -180,7 +180,7 @@ resource "aws_codebuild_project" "pipeline_apply_stage_project" {
     }
 
     dynamic "environment_variable" {
-      for_each = var.codebuild_environment_variables
+      for_each = local.codebuild_environment_variables
       iterator = env
 
       content {
