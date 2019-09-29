@@ -38,6 +38,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Validate Code
         run: |
+          terraform init
           terraform validate
       - name: Validate Example
         run: |
