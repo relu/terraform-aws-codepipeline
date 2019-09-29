@@ -38,6 +38,16 @@ to install pre-commit locally.
 And install `terraform-docs` with `go get github.com/segmentio/terraform-docs`
 or `brew install terraform-docs`.
 
+## Change log
+
+The
+[changelog](https://github.com/relu/terraform-aws-codepipeline/tree/master/CHANGELOG.md)
+captures all important release notes.
+
+## Authors
+
+Created by [Aurel Canciu](https://github.com/relu) - aurelcanciu@gmail.com
+
 ## License
 
 MIT Licensed. See
