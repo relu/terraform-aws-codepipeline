@@ -69,6 +69,12 @@ variable "pipeline_terraform_project_path" {
   default     = "."
 }
 
+variable "pipeline_plan_stage_role_policy_arn" {
+  description = "Policy to attach to the Plan stage CodeBuild role assumed during execution"
+  type        = string
+  default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+}
+
 variable "pipeline_plan_stage_buildspec" {
   description = "The Plan stage buildspec"
   type        = string
@@ -92,6 +98,12 @@ variable "pipeline_plan_stage_buildspec" {
     files:
       - '**/*'
   BUILDSPEC
+}
+
+variable "pipeline_apply_stage_role_policy_arn" {
+  description = "Policy to attach to the Apply stage CodeBuild role assumed during execution"
+  type        = string
+  default     = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 variable "pipeline_apply_stage_buildspec" {

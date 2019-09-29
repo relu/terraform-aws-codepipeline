@@ -47,9 +47,9 @@ resource "aws_iam_role_policy" "pipeline_plan_stage_role_policy" {
   policy = data.aws_iam_policy_document.pipeline_plan_stage_role_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "pipeline_plan_stage_readonly_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "pipeline_plan_stage_policy_attachment" {
   role       = aws_iam_role.pipeline_plan_stage_role.name
-  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  policy_arn = var.pipeline_plan_stage_role_policy_arn
 }
 
 resource "aws_codebuild_project" "pipeline_plan_stage_project" {
@@ -143,9 +143,9 @@ resource "aws_iam_role_policy" "pipeline_apply_stage_role_policy" {
   policy = data.aws_iam_policy_document.pipeline_apply_stage_role_policy.json
 }
 
-resource "aws_iam_role_policy_attachment" "pipeline_apply_stage_readonly_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "pipeline_apply_stage_policy_attachment" {
   role       = aws_iam_role.pipeline_apply_stage_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  policy_arn = var.pipeline_apply_stage_role_policy_arn
 }
 
 resource "aws_codebuild_project" "pipeline_apply_stage_project" {
