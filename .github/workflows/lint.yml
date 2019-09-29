@@ -44,6 +44,9 @@ jobs:
           terraform init
           terraform validate
       - name: Validate Example
+        env:
+          AWS_REGION: 'us-east-1'
+          TF_WARN_OUTPUT_ERRORS: 1
         run: |
           cd ./example
           terraform init
