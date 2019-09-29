@@ -84,10 +84,10 @@ variable "pipeline_plan_stage_buildspec" {
     pre_build:
       commands:
         - cd $${TERRAFORM_DIRECTORY}
-        - terraform init -input=false
+        - terraform init
     build:
       commands:
-        - terraform plan -input=false -out=tfplan
+        - terraform plan -out=tfplan
   artifacts:
     files:
       - '**/*'
@@ -109,6 +109,6 @@ variable "pipeline_apply_stage_buildspec" {
     build:
       commands:
         - cd $${TERRAFORM_DIRECTORY}
-        - terraform apply -input=false -auto-approve tfplan
+        - terraform apply -auto-approve tfplan
   BUILDSPEC
 }

@@ -82,14 +82,15 @@ resource "aws_codebuild_project" "pipeline_plan_stage_project" {
         value = env.value
       }
     }
-    environment_variable {
-      name  = "TERRAFORM_VERSION"
-      value = var.pipeline_terraform_version
-    }
 
-    environment_variable {
-      name  = "TERRAFORM_DIRECTORY"
-      value = var.pipeline_terraform_project_path
+    dynamic "environment_variable" {
+      for_each = var.codebuild_environment_variables
+      iterator = env
+
+      content {
+        name  = env.key
+        value = env.value
+      }
     }
   }
 }
@@ -177,9 +178,15 @@ resource "aws_codebuild_project" "pipeline_apply_stage_project" {
         value = env.value
       }
     }
-    environment_variable {
-      name  = "TERRAFORM_VERSION"
-      value = var.pipeline_terraform_version
+
+    dynamic "environment_variable" {
+      for_each = var.codebuild_environment_variables
+      iterator = env
+
+      content {
+        name  = env.key
+        value = env.value
+      }
     }
   }
 }
