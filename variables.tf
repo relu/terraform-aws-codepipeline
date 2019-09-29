@@ -45,24 +45,34 @@ variable "pipeline_source_configuration" {
   default     = {}
 }
 
-variable "pipeline_apply_approval" {
-  type    = bool
-  default = true
+variable "pipeline_apply_require_approval" {
+  description = "Whether to require approval on the Apply stage"
+  type        = bool
+  default     = true
 }
 
 variable "pipeline_terraform_version" {
-  type    = string
-  default = "0.12.9"
+  description = "The Terraform version"
+  type        = string
+  default     = "0.12.9"
 }
 
 variable "pipeline_terraform_environment_variables" {
-  type    = map
-  default = {}
+  description = "Environment variables available to terraform during execution"
+  type        = map
+  default     = {}
+}
+
+variable "pipeline_terraform_project_path" {
+  description = "Relative path to the terraform project. Change this if your terraform project is not located at the root."
+  type        = string
+  default     = "."
 }
 
 variable "pipeline_plan_stage_buildspec" {
-  type    = string
-  default = <<BUILDSPEC
+  description = "The Plan stage buildspec"
+  type        = string
+  default     = <<BUILDSPEC
   version: 0.2
   phases:
     install:
@@ -73,6 +83,7 @@ variable "pipeline_plan_stage_buildspec" {
         - unzip /tmp/terraform.zip -d /usr/bin/
     pre_build:
       commands:
+        - cd $${TERRAFORM_DIRECTORY}
         - terraform init -input=false
     build:
       commands:
@@ -84,8 +95,9 @@ variable "pipeline_plan_stage_buildspec" {
 }
 
 variable "pipeline_apply_stage_buildspec" {
-  type    = string
-  default = <<BUILDSPEC
+  description = "The Apply stage buildspec"
+  type        = string
+  default     = <<BUILDSPEC
   version: 0.2
   phases:
     install:
@@ -96,6 +108,7 @@ variable "pipeline_apply_stage_buildspec" {
         - unzip /tmp/terraform.zip -d /usr/bin/
     build:
       commands:
+        - cd $${TERRAFORM_DIRECTORY}
         - terraform apply -input=false -auto-approve tfplan
   BUILDSPEC
 }
