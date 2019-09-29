@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "pipeline_assume_role_policy" {
 }
 
 resource "aws_iam_role" "pipeline_role" {
-  name               = "${var.pipeline_name}-role"
+  name               = "${var.pipeline_name}-pipeline-role"
   assume_role_policy = data.aws_iam_policy_document.pipeline_assume_role_policy.json
 }
 
