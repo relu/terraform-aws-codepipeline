@@ -37,6 +37,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Validate Code
+        env:
+          AWS_REGION: 'us-east-1'
+          TF_WARN_OUTPUT_ERRORS: 1
         run: |
           terraform init
           terraform validate
